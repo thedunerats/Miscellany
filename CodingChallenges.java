@@ -1,5 +1,7 @@
 package com.revature;
 
+import java.util.Scanner;
+
 public class CodingChallenges {
 
 	public CodingChallenges() {
@@ -60,15 +62,71 @@ public class CodingChallenges {
 		
 	}
 	
-	public int smallestMissingPositiveInt(int arr[]) {
-		int missingNo;
+	
+	public static void isInAlphabeticalOrder(String...a) {
+		//takes in variable arguments
+		// nested for loop, input behaves like a 2-D array
 		
-		return missingNo;
+		//MISSING: needs to add arbitrary alphabetical order
+		// need to make the order completely modular.
+		// may or may not do this.
+		// CODING CHALLENGE: 11/11/2019
 		
+		System.out.println("In which alphabetical order?");
+		Scanner scan = new Scanner(System.in);
+		String order = scan.nextLine();
+		
+		boolean isFinished = false; //detects an early exit from inner loop
+		
+		//check order
+		switch (order) {
+			case "forward":
+				for (String word: a) { //iterates through all the strings provided
+					for (int j = 0; j < word.length() - 1; j++) { //iterates through characters in the string
+						if (word.charAt(j) > word.charAt(j+1)) {
+							isFinished = true;
+							System.out.println(false);
+							break; // exit the loop
+						}
+					}
+					if (isFinished) { //checks for an early exit in the inner loop
+						break;
+					}
+				}
+				if (!isFinished) {
+					System.out.println(true); //will only occur if an early exit does not occur
+				}
+				scan.close();
+				break;  //close scanner and exit the loop
+			
+			case "reverse":
+				for (String word: a) { //iterates through all the strings provided
+					for (int j = 0; j < word.length() - 1; j++) { //iterates through characters in the string
+						if (word.charAt(j) < word.charAt(j+1)) {
+							isFinished = true;
+							System.out.println(false);
+							break; // exit the loop
+						}
+					}
+					if (isFinished) { //checks for an early exit in the inner loop
+						break;
+					}
+				}
+				if (!isFinished) {
+					System.out.println(true); //will only occur if an early exit does not occur
+				}
+				scan.close();
+				break;
+		}
+
 	}
+
 	
 	public static void main(String[] args) {
-		LookAndSay(6); //FIXME: not sure why this needs to be static.
-	}
+		//	isInAlphabeticalOrder("vabcde","abcde","Your mamma");  //FIXME:  undo this later.
+		//working for forward. reverse is working too.
+			isInAlphabeticalOrder("zyx","srq");
+	    } 
+
 
 }

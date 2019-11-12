@@ -62,12 +62,17 @@ public class CodingChallenges {
 		
 	}
 	
+	protected static void nthSmallestInteger(int[] arr) {
+		
+	}
+	
 	
 	public static void isInAlphabeticalOrder(String...a) {
 		//takes in variable arguments
 		// nested for loop, input behaves like a 2-D array
 		
 		//MISSING: needs to add arbitrary alphabetical order
+		// MISSING: needs to check word list to see if words are ordered.
 		// need to make the order completely modular.
 		// may or may not do this.
 		// CODING CHALLENGE: 11/11/2019
@@ -78,15 +83,44 @@ public class CodingChallenges {
 		
 		boolean isFinished = false; //detects an early exit from inner loop
 		
+		// FIXME: compare characters in same position, but in subsequent strings.
+		// may input strings with different lengths.
+		// It will most likely throw an out of index exception, need to catch it / handle it
+		// or make a custom exception
+		// will probably need to check for a null value early.
+		// might apply this fix by changing the outer loop to a regular loop, since it will only 
+		// iterate length() - 1 times.
+		
+		System.out.println(a.length);
+		
 		//check order
 		switch (order) {
-			case "forward":
-				for (String word: a) { //iterates through all the strings provided
-					for (int j = 0; j < word.length() - 1; j++) { //iterates through characters in the string
-						if (word.charAt(j) > word.charAt(j+1)) {
+			case "forward":			// the length method in the next line is for an array.
+				for (int i = 0; i < a.length -1; i++) { //iterates through all the string pairs provided
+					for (int j = 0; j < a[i].length(); j++) { //iterates through characters in the current string
+						// if the 2 strings differ in length
+						// i.e. if the next string is shorter than the current one
+						// might throw an exception
+						// NOTE: continue moves to the next iteration of a loop.
+						
+						// the inner loop breaks if it doesn't find anything out of order.
+						// it should only iterate through the entire string if the 
+						// characters are identical.
+						
+						//FIXME: hitting a[2] when it should not be happening.
+						if (a[i].charAt(j) < a[i + 1].charAt(j)) {
+							break; // in order; moves on to next pair of strings
+						}
+	
+						if (a[i].charAt(j) > a[i + 1].charAt(j)) { // out of order
 							isFinished = true;
 							System.out.println(false);
 							break; // exit the loop
+						}
+						
+						if (j + 1 == a[i+1].length()) { // check for the end of next string
+							// to avoid an out of bounds exception
+							break; // move to the next iteration of the outer loop.
 						}
 					}
 					if (isFinished) { //checks for an early exit in the inner loop
@@ -100,12 +134,31 @@ public class CodingChallenges {
 				break;  //close scanner and exit the loop
 			
 			case "reverse":
-				for (String word: a) { //iterates through all the strings provided
-					for (int j = 0; j < word.length() - 1; j++) { //iterates through characters in the string
-						if (word.charAt(j) < word.charAt(j+1)) {
+				for (int i = 0; i < a.length -1; i++) { //iterates through all the string pairs provided
+					for (int j = 0; j < a[i].length(); j++) { //iterates through characters in the current string
+						// if the 2 strings differ in length
+						// i.e. if the next string is shorter than the current one
+						// might throw an exception
+						// NOTE: continue moves to the next iteration of a loop.
+						
+						// the inner breaks if it doesn't find anything out of order.
+						// it should only iterate through the entire string if the 
+						// characters are identical.
+						
+						//FIXME: hitting a[2] when it should not be happening.
+						if (a[i].charAt(j) > a[i + 1].charAt(j)) {
+							break; // in order; moves on to next pair of strings
+						}
+	
+						if (a[i].charAt(j) < a[i + 1].charAt(j)) { // out of order
 							isFinished = true;
 							System.out.println(false);
 							break; // exit the loop
+						}
+						
+						if (j + 1 == a[i+1].length()) { // check for the end of next string
+							// to avoid an out of bounds exception
+							break; // move to the next iteration of the outer loop.
 						}
 					}
 					if (isFinished) { //checks for an early exit in the inner loop
@@ -117,6 +170,10 @@ public class CodingChallenges {
 				}
 				scan.close();
 				break;
+			
+			default:
+				System.out.println("That's not a good input.");
+				break;
 		}
 
 	}
@@ -125,7 +182,8 @@ public class CodingChallenges {
 	public static void main(String[] args) {
 		//	isInAlphabeticalOrder("vabcde","abcde","Your mamma");  //FIXME:  undo this later.
 		//working for forward. reverse is working too.
-			isInAlphabeticalOrder("zyx","srq");
+			isInAlphabeticalOrder("alpha", "yankee");
+			System.out.println('A' < 'a'); // i think this compares ASCII values. this returns true.
 	    } 
 
 

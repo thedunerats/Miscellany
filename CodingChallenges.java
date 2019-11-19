@@ -193,7 +193,7 @@ public class CodingChallenges {
 	      
 	    // insert all the elements  
 	    // of 1st array in the arraylist 
-	    // table(unordered_set 'us')  
+	    // table(unordered_set 'as')  
 	    for (int i = 0; i < arr1.length; i++)  {
 	        as.add(arr1[i]);  
 	    }
@@ -216,6 +216,24 @@ public class CodingChallenges {
 	    }
 		
 	} 
+	
+	protected static void reverseWordsInAString(String s) {
+		// within a string, preserve the whitespace / word spacing 
+		// while reversing the order of characters in each word.
+		
+		// CODING CHALLENGE: 11/19/2019
+		
+		StringBuilder sb = new StringBuilder();
+	
+        String words[] = s.split(" ");  // splits the input string into an array of
+        // strings based on a split character
+        for (String word: words) // iterates through all the entries in the string array
+            sb.append(new StringBuilder(word).reverse().toString() + " "); //uses the reverse
+        //method to reverse the entry in the array, append it to the string builder and add the
+        // space back in
+        System.out.println(sb.toString().trim()); // outputs the fully appended StringBuilder
+        // .trim() removes any extra whitespace
+	}
 
 	
 	public static void main(String[] args) {
@@ -229,6 +247,8 @@ public class CodingChallenges {
 		 int arr2[] = {3, 6, 8, 1, 3, 5};  
 		 
 		 printPairsEqualToSum(arr1,arr2,1090);
+		 
+		 reverseWordsInAString("The quick brown fox jumped over the lazy dog.");
 		
 	} 
 

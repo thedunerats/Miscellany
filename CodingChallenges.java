@@ -1,5 +1,7 @@
 package com.revature;
 
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CodingChallenges {
@@ -106,8 +108,7 @@ public class CodingChallenges {
 						// the inner loop breaks if it doesn't find anything out of order.
 						// it should only iterate through the entire string if the 
 						// characters are identical.
-						
-						//FIXME: hitting a[2] when it should not be happening.
+
 						if (a[i].charAt(j) < a[i + 1].charAt(j)) {
 							break; // in order; moves on to next pair of strings
 						}
@@ -177,14 +178,79 @@ public class CodingChallenges {
 		}
 
 	}
+	
+	protected static void printPairsEqualToSum(int[] arr1, int[] arr2, int sum) {
+		// checks 2 arrays and outputs the pairs equal to the sum
+		// When in doubt, pseudocode it out.
+		//an array list if we need to account for the duplicates.
+		
+		// CODING CHALLENGE: 11/18/2019
+		
+		int count = 0;  
+	      
+		// creating an arraylist from first array to use the contains() method
+	    ArrayList<Integer> as = new ArrayList<Integer>(); 
+	      
+	    // insert all the elements  
+	    // of 1st array in the arraylist 
+	    // table(unordered_set 'as')  
+	    for (int i = 0; i < arr1.length; i++)  {
+	        as.add(arr1[i]);  
+	    }
+	    // for each element of arr2[]  
+	    for (int j = 0; j < arr2.length; j++)  {
+	  
+	        // find all cases where(x - arr2[j]) in 'as'  
+	        if (as.contains(sum - arr2[j]))  { // if pair element is found in array 1
+	            for (int k: as) { // repeat print for duplicate entries in the arraylist as
+	            	if (k == sum - arr2[j]) { 
+	            	count++;  
+	            	System.out.println("["+ (sum-arr2[j]) + "," + arr2[j] + "]"); //display in paired form
+	            	}
+	            }
+	        }
+	    }
+	    
+	    if (count == 0) { // if no combos are found
+	    	System.out.println("No pairs found.");
+	    }
+		
+	} 
+	
+	protected static void reverseWordsInAString(String s) {
+		// within a string, preserve the whitespace / word spacing 
+		// while reversing the order of characters in each word.
+		
+		// CODING CHALLENGE: 11/19/2019
+		
+		StringBuilder sb = new StringBuilder();
+	
+        String words[] = s.split(" ");  // splits the input string into an array of
+        // strings based on a split character
+        for (String word: words) // iterates through all the entries in the string array
+            sb.append(new StringBuilder(word).reverse().toString() + " "); //uses the reverse
+        //method to reverse the entry in the array, append it to the string builder and add the
+        // space back in
+        System.out.println(sb.toString().trim()); // outputs the fully appended StringBuilder
+        // .trim() removes any extra whitespace
+	}
 
 	
 	public static void main(String[] args) {
-		//	isInAlphabeticalOrder("vabcde","abcde","Your mamma");  //FIXME:  undo this later.
+		//	isInAlphabeticalOrder("vabcde","abcde","Your mamma");
 		//working for forward. reverse is working too.
-			isInAlphabeticalOrder("alpha", "yankee");
-			System.out.println('A' < 'a'); // i think this compares ASCII values. this returns true.
-	    } 
+			//isInAlphabeticalOrder("alpha", "yankee");
+			//System.out.println('A' < 'a'); // i think this compares ASCII values. this returns true.
+
+		
+		 int arr1[] = {1, 2, 5, 2, 8, 4};  
+		 int arr2[] = {3, 6, 8, 1, 3, 5};  
+		 
+		 printPairsEqualToSum(arr1,arr2,1090);
+		 
+		 reverseWordsInAString("The quick brown fox jumped over the lazy dog.");
+		
+	} 
 
 
 }

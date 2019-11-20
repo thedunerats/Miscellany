@@ -3,6 +3,9 @@ package com.revature;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashSet;
+
+
 
 public class CodingChallenges {
 
@@ -184,6 +187,13 @@ public class CodingChallenges {
 		// When in doubt, pseudocode it out.
 		//an array list if we need to account for the duplicates.
 		
+		/* NOTE: another way to do this is to use a 
+		 * hashmap with the key-value pairs as the sum.
+		 * you would just use (sum - arr[i]) to generate the 
+		 * value along with the key for the 
+		 * hashmap.
+		 */
+		
 		// CODING CHALLENGE: 11/18/2019
 		
 		int count = 0;  
@@ -226,13 +236,35 @@ public class CodingChallenges {
 		StringBuilder sb = new StringBuilder();
 	
         String words[] = s.split(" ");  // splits the input string into an array of
-        // strings based on a split character
-        for (String word: words) // iterates through all the entries in the string array
+        // strings based on a split character or regex
+        for (String word: words) {// iterates through all the entries in the string array
             sb.append(new StringBuilder(word).reverse().toString() + " "); //uses the reverse
         //method to reverse the entry in the array, append it to the string builder and add the
         // space back in
+        }
         System.out.println(sb.toString().trim()); // outputs the fully appended StringBuilder
         // .trim() removes any extra whitespace
+        // need to cast to a string to use trim()
+	}
+	
+	protected static HashSet<Integer> inBothArrays(int[] arr1, int[] arr2) {
+		// CODING CHALLENGE: 11/20/2019
+		
+		HashSet<Integer> arrCommon = new HashSet<Integer>(); //output for common entries. no duplicates.
+		// sort the input arrays
+		HashSet<Integer> newOne = new HashSet<Integer>(); //place everything from arr1 in a new hashset
+		for(int j = 0; j < arr1.length; j++) {
+			newOne.add(arr1[j]);
+		}
+		// check for entries arrays have in common
+		for (int i = 0; i < arr2.length; i++) { // iterate through second array
+			if (newOne.contains(arr2[i])) {  
+				// will not add duplicates or if nothing is found
+				arrCommon.add(arr2[i]);
+			}
+		}
+		System.out.println(arrCommon); // testing
+		return arrCommon;
 	}
 
 	
@@ -248,8 +280,9 @@ public class CodingChallenges {
 		 
 		 printPairsEqualToSum(arr1,arr2,1090);
 		 
-		 reverseWordsInAString("The quick brown fox jumped over the lazy dog.");
-		
+		 reverseWordsInAString("Bien gracias, y tu?");
+		 
+		 HashSet<Integer> overlap = inBothArrays(arr1,arr2);
 	} 
 
 

@@ -251,7 +251,6 @@ public class CodingChallenges {
 		// CODING CHALLENGE: 11/20/2019
 		
 		HashSet<Integer> arrCommon = new HashSet<Integer>(); //output for common entries. no duplicates.
-		// sort the input arrays
 		HashSet<Integer> newOne = new HashSet<Integer>(); //place everything from arr1 in a new hashset
 		for(int j = 0; j < arr1.length; j++) {
 			newOne.add(arr1[j]);
@@ -266,6 +265,47 @@ public class CodingChallenges {
 		System.out.println(arrCommon); // testing
 		return arrCommon;
 	}
+	
+	protected static void allDistinctPermutations(String str, String ans) {
+			// CODING CHALLENGE: 11/22/2019
+		
+			// Recursive printing of distinct permutations. Duplicates not included.
+			// takes in a string and a placeholder for the recursive input.
+	  
+	        // If string is empty 
+	        if (str.length() == 0) {  // The input string gets smaller for every recursive call.
+	  
+	            // print the recursive output here. 
+	            System.out.print(ans + " "); 
+	            return;  // This is the end of the recursive function.
+	        	} 
+	  
+	        // Make a boolean array of size '26' which 
+	        // stores false by default and returns true  
+	        // at the position which alphabet is being 
+	        // used 
+	        boolean alphabet[] = new boolean[26]; 
+	  
+	        for (int i = 0; i < str.length(); i++) { 
+	  
+	            // ith character of input string str 
+	            char ch = str.charAt(i); 
+	  
+	            // Rest of the string after excluding  
+	            // the ith character 
+	            String ros = str.substring(0, i) +  
+	                         str.substring(i + 1); 
+	  
+	            // If the character has not been used  
+	            // then recursive call will take place.  
+	            // Otherwise, there will be no recursive 
+	            // call 
+	            if (alphabet[ch - 'a'] == false) {
+	                allDistinctPermutations(ros, ans + ch); 
+	            }
+	            alphabet[ch - 'a'] = true; 
+	        	} 
+			}
 
 	
 	public static void main(String[] args) {
@@ -280,9 +320,13 @@ public class CodingChallenges {
 		 
 		 printPairsEqualToSum(arr1,arr2,1090);
 		 
-		 reverseWordsInAString("Bien gracias, y tu?");
+		 //reverseWordsInAString("Bien gracias, y tu?");
 		 
-		 HashSet<Integer> overlap = inBothArrays(arr1,arr2);
+		 //HashSet<Integer> overlap = inBothArrays(arr1,arr2);
+		 
+		 allDistinctPermutations("regal","");
+		 
+		 
 	} 
 
 

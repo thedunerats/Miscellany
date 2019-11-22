@@ -267,7 +267,7 @@ public class CodingChallenges {
 	}
 	
 	protected static void allDistinctPermutations(String str, String ans) {
-			// CODING CHALLENGE: 11/22/2019
+			// CODING CHALLENGE: 11/21/2019
 		
 			// Recursive printing of distinct permutations. Duplicates not included.
 			// takes in a string and a placeholder for the recursive input.
